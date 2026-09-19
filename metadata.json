@@ -2,5 +2,7 @@
   "name": "Studio Valéria Souza",
   "description": "Biosite e Landing Page oficial do Studio Valéria Souza - A melhor extensionista de cílios da cidade e região. Agendamentos via WhatsApp, Instagram, Facebook e avaliações Google.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
