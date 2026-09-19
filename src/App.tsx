@@ -51,15 +51,6 @@ const PROCEDURES: Procedure[] = [
     highlights: ['Efeito rímel perfeito', 'Ideal para o dia a dia', 'Aspecto 100% natural'],
   },
   {
-    id: 'lash-lifting',
-    name: 'Lash Lifting & Nutrição Profunda',
-    category: 'Tratamento Natural',
-    description: 'Tratamento que curva, alinha e pigmenta os seus próprios cílios naturais, incluindo blend de aminoácidos e queratina para fortalecimento.',
-    duration: '1h15',
-    highlights: ['Sem manutenção constante', 'Nutrição e brilho intenso', 'Efeito de 6 a 8 semanas'],
-    popular: true,
-  },
-  {
     id: 'hibrido',
     name: 'Volume Híbrido / Kim Kardashian',
     category: 'Extensão de Cílios',
