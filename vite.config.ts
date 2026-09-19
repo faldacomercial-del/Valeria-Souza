@@ -7,8 +7,11 @@ import {defineConfig} from 'vite';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
   return {
+    define: {
+      'process.env.NODE_ENV': JSON.stringify(mode === 'development' ? 'development' : 'production'),
+    },
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
@@ -16,7 +19,7 @@ export default defineConfig(() => {
       },
     },
     build: {
-      target: 'es2020',
+      target: 'es2022',
       cssMinify: true,
       minify: 'esbuild' as const,
     },

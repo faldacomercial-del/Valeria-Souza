@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import logoWebp from './assets/logo.webp';
-import logoImg from './assets/logo.jpg';
 import {
   MessageCircle,
   Instagram,
@@ -10,9 +8,7 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
-  Calendar,
   ChevronDown,
-  ChevronUp,
   ChevronRight,
   Check,
   Copy,
@@ -131,7 +127,7 @@ export default function App() {
   const FACEBOOK_URL = 'https://www.facebook.com/valeria.regina.souza.2025';
   const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?q=studio+valeria+souza+len%C3%A7ois+paulista&sca_esv=b9492bfdbc0b4a5b&sxsrf=APpeQnvRRFb2mxXjH-Qm1VwtFlewXD3nbg%3A1789830798235&ei=jqauau_xDbn75OUP1rOd0AU&biw=1164&bih=490&oq=studio+&gs_lp=Egxnd3Mtd2l6LXNlcnAiB3N0dWRpbyAqBAgAGCcyBBAjGCcyExAuGIAEGIoFGEMYsQMYxwEY0QMyEBAAGIAEGIoFGEMYsQMYgwEyDRAAGIAEGBQYhwIYsQMyCBAAGIAEGLQHMggQABiABBi0BzIKEAAYgAQYigUYQzIIEAAYgAQYtAcyBRAAGIAEMggQABiABBixA0i5JlAAWKkKcAB4AZABAJgBjQGgAfcGqgEDMC43uAEByAEA-AEBmAIHoAKhB8ICCxAuGIMBGLEDGIAEwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQLhiABMICCxAAGIAEGLEDGIMBwgIIEC4YgAQYsQPCAgsQLhiABBixAxiDAcICChAjGPAFGMkCGCfCAhMQLhiABBgUGIcCGLEDGMcBGNEDwgILEC4YsQMYgAQYtAfCAg0QABiABBiKBRhDGLEDmAMAkgcDMC43oAfsTrIHAzAuN7gHoQfCBwUwLjEuNsgHH4AIAQ&sclient=gws-wiz-serp#sv=CAESzQEKuQEStgEKd0FKaVQ0dElYcFhnNjJVOWxlb3Z1UWZWMVEyd1dCTDFrT3dZWGZXR2RjdEJuRndUZkxTMFQwTUptdlBMcXlyX0pNZHR3d1Z3SmJaNkZaV1lQZ005aU9LWWs1MDNSeWx0ZnZHa1BZRENUQTA0UVZNajFkTnYxLXo0EhdKYXF1YW95YkVwemMxc1FQNzR1R3dRbxoiQURzcjlmUkliTDdnQ0RmbHduZEFFNnNyX0VybFVFbnhWURIEODA1MRoBMyoAMAA4AUAAGAAgxYidfUoCEAE';
   const REMOTE_LOGO_URL = 'https://i.postimg.cc/Zq2VRNPS/Gemini-Generated-Image-vkahqdvkahqdvkah.jpg';
-  const [logoSrc, setLogoSrc] = useState<string>(logoWebp || logoImg || REMOTE_LOGO_URL);
+  const [logoSrc, setLogoSrc] = useState<string>('/logo.webp');
 
   const scrollToSection = (index: number) => {
     setActiveSection(index);
@@ -252,7 +248,7 @@ export default function App() {
               {/* Inner container to frame image cleanly */}
               <div className="w-full h-full rounded-full overflow-hidden bg-[#180a13] flex items-center justify-center relative shadow-[inset_0_0_15px_rgba(0,0,0,0.8)]">
                 <picture>
-                  <source srcSet={logoWebp} type="image/webp" />
+                  <source srcSet="/logo.webp" type="image/webp" />
                   <img
                     src={logoSrc}
                     alt="Logomarca Oficial Studio Valéria Souza"
@@ -267,6 +263,7 @@ export default function App() {
                     }}
                     loading="eager"
                     decoding="async"
+                    fetchPriority="high"
                   />
                 </picture>
                 {/* 3D Glass reflection sweep */}
@@ -604,7 +601,7 @@ export default function App() {
         <section
           ref={(el) => { sectionRefs.current[2] = el; }}
           id="section-procedimentos"
-          className="snap-start transition-all duration-500"
+          className="snap-start content-auto transition-all duration-500"
         >
           <div className="glass-card-3d rounded-3xl p-6 sm:p-8 relative overflow-hidden">
             <div className="text-center mb-6">
@@ -727,7 +724,7 @@ export default function App() {
         <section
           ref={(el) => { sectionRefs.current[3] = el; }}
           id="section-avaliacoes"
-          className="snap-start transition-all duration-500"
+          className="snap-start content-auto transition-all duration-500"
         >
           <div className="glass-card-3d rounded-3xl p-6 sm:p-8 relative overflow-hidden">
             {/* Header with Google Stars */}
@@ -801,7 +798,7 @@ export default function App() {
         <section
           ref={(el) => { sectionRefs.current[4] = el; }}
           id="section-localizacao"
-          className="snap-start transition-all duration-500"
+          className="snap-start content-auto transition-all duration-500"
         >
           <div className="glass-card-3d rounded-3xl p-6 sm:p-8 relative overflow-hidden">
             <div className="text-center mb-6">
@@ -957,7 +954,7 @@ export default function App() {
 
             <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 border-2 border-rose-400 shadow-md">
               <picture>
-                <source srcSet={logoWebp} type="image/webp" />
+                <source srcSet="/logo.webp" type="image/webp" />
                 <img
                   src={logoSrc}
                   alt="Valéria Souza"

@@ -97,3 +97,9 @@
 .animate-sheen {
   animation: sheen-sweep 5s infinite ease-in-out;
 }
+
+/* Mobile Performance: Defer layout & rendering for below-the-fold sections */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
+}
