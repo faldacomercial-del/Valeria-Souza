@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import logoWebp from './assets/logo.webp';
+import logoImg from './assets/logo.jpg';
 import {
   MessageCircle,
   Instagram,
@@ -128,29 +130,38 @@ export default function App() {
   const INSTAGRAM_URL = 'https://www.instagram.com/studiovaleria_souza/';
   const FACEBOOK_URL = 'https://www.facebook.com/valeria.regina.souza.2025';
   const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?q=studio+valeria+souza+len%C3%A7ois+paulista&sca_esv=b9492bfdbc0b4a5b&sxsrf=APpeQnvRRFb2mxXjH-Qm1VwtFlewXD3nbg%3A1789830798235&ei=jqauau_xDbn75OUP1rOd0AU&biw=1164&bih=490&oq=studio+&gs_lp=Egxnd3Mtd2l6LXNlcnAiB3N0dWRpbyAqBAgAGCcyBBAjGCcyExAuGIAEGIoFGEMYsQMYxwEY0QMyEBAAGIAEGIoFGEMYsQMYgwEyDRAAGIAEGBQYhwIYsQMyCBAAGIAEGLQHMggQABiABBi0BzIKEAAYgAQYigUYQzIIEAAYgAQYtAcyBRAAGIAEMggQABiABBixA0i5JlAAWKkKcAB4AZABAJgBjQGgAfcGqgEDMC43uAEByAEA-AEBmAIHoAKhB8ICCxAuGIMBGLEDGIAEwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQLhiABMICCxAAGIAEGLEDGIMBwgIIEC4YgAQYsQPCAgsQLhiABBixAxiDAcICChAjGPAFGMkCGCfCAhMQLhiABBgUGIcCGLEDGMcBGNEDwgILEC4YsQMYgAQYtAfCAg0QABiABBiKBRhDGLEDmAMAkgcDMC43oAfsTrIHAzAuN7gHoQfCBwUwLjEuNsgHH4AIAQ&sclient=gws-wiz-serp#sv=CAESzQEKuQEStgEKd0FKaVQ0dElYcFhnNjJVOWxlb3Z1UWZWMVEyd1dCTDFrT3dZWGZXR2RjdEJuRndUZkxTMFQwTUptdlBMcXlyX0pNZHR3d1Z3SmJaNkZaV1lQZ005aU9LWWs1MDNSeWx0ZnZHa1BZRENUQTA0UVZNajFkTnYxLXo0EhdKYXF1YW95YkVwemMxc1FQNzR1R3dRbxoiQURzcjlmUkliTDdnQ0RmbHduZEFFNnNyX0VybFVFbnhWURIEODA1MRoBMyoAMAA4AUAAGAAgxYidfUoCEAE';
-  const LOGO_IMG_URL = 'https://i.postimg.cc/Zq2VRNPS/Gemini-Generated-Image-vkahqdvkahqdvkah.jpg';
+  const REMOTE_LOGO_URL = 'https://i.postimg.cc/Zq2VRNPS/Gemini-Generated-Image-vkahqdvkahqdvkah.jpg';
+  const [logoSrc, setLogoSrc] = useState<string>(logoWebp || logoImg || REMOTE_LOGO_URL);
 
   const scrollToSection = (index: number) => {
     setActiveSection(index);
     sectionRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Scroll spy to detect active carousel card
+  // IntersectionObserver to detect active section with 0 layout thrashing
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
-      sectionRefs.current.forEach((ref, index) => {
-        if (!ref) return;
-        const top = ref.offsetTop;
-        const height = ref.offsetHeight;
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          setActiveSection(index);
-        }
-      });
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = sectionRefs.current.findIndex((ref) => ref === entry.target);
+            if (index !== -1) {
+              setActiveSection(index);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -40% 0px',
+        threshold: 0.1,
+      }
+    );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    sectionRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const handleCopyLink = () => {
@@ -165,15 +176,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#140b10] text-[#fce7f3] relative overflow-x-hidden selection:bg-[#f43f5e] selection:text-white">
-      {/* Ambient background glow layers (refined pink & rose quartz tones) */}
+    <div className="min-h-screen text-[#fce7f3] relative overflow-x-hidden selection:bg-[#f43f5e] selection:text-white">
+      {/* Subtle luxury geometric grid texture (lightweight, no GPU blurs) */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-[#e11d48]/25 via-[#be123c]/15 to-transparent rounded-full blur-[120px] opacity-80" />
-        <div className="absolute top-[35%] right-[-10%] w-[450px] h-[450px] bg-[#fb7185]/15 rounded-full blur-[100px] opacity-60" />
-        <div className="absolute top-[65%] left-[-15%] w-[500px] h-[500px] bg-[#be185d]/20 rounded-full blur-[120px] opacity-65" />
-        <div className="absolute bottom-0 right-[20%] w-[550px] h-[550px] bg-[#9d174d]/25 rounded-full blur-[140px] opacity-70" />
-        {/* Subtle luxury geometric grid texture */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(244,63,94,0.06)_1px,transparent_1px)] [background-size:24px_24px] opacity-70" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(244,63,94,0.06)_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
       </div>
 
       {/* Top Floating Glass Navigation Bar */}
@@ -239,19 +245,30 @@ export default function App() {
           {/* LOGOMARCA OFICIAL CENTRALIZADA EM TAMANHO GRANDE */}
           <div className="relative mb-6 group">
             {/* Ambient 3D glow & circular frame */}
-            <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#f43f5e] via-[#fb7185] to-[#fda4af] opacity-65 blur-lg group-hover:opacity-90 transition-all duration-700 animate-pulse" />
+            <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#f43f5e] via-[#fb7185] to-[#fda4af] opacity-50 blur-md group-hover:opacity-80 transition-opacity duration-300" />
             
             {/* Outer metallic rose-gold border */}
-            <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-[3px] bg-gradient-to-b from-[#fecdd3] via-[#e11d48] to-[#4c0519] shadow-[0_20px_40px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(255,255,255,0.6)]">
+            <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-[3px] bg-gradient-to-b from-[#fecdd3] via-[#e11d48] to-[#4c0519] shadow-[0_15px_30px_rgba(0,0,0,0.7)]">
               {/* Inner container to frame image cleanly */}
-              <div className="w-full h-full rounded-full overflow-hidden bg-[#180a13] flex items-center justify-center relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
-                <img
-                  src={LOGO_IMG_URL}
-                  alt="Logomarca Oficial Studio Valéria Souza"
-                  className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                  loading="eager"
-                />
+              <div className="w-full h-full rounded-full overflow-hidden bg-[#180a13] flex items-center justify-center relative shadow-[inset_0_0_15px_rgba(0,0,0,0.8)]">
+                <picture>
+                  <source srcSet={logoWebp} type="image/webp" />
+                  <img
+                    src={logoSrc}
+                    alt="Logomarca Oficial Studio Valéria Souza"
+                    width={208}
+                    height={208}
+                    className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-105"
+                    onError={() => {
+                      // If local fails to resolve in certain deployment contexts, fall back to remote URL; and vice-versa
+                      if (logoSrc !== REMOTE_LOGO_URL) {
+                        setLogoSrc(REMOTE_LOGO_URL);
+                      }
+                    }}
+                    loading="eager"
+                    decoding="async"
+                  />
+                </picture>
                 {/* 3D Glass reflection sweep */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/15 to-transparent pointer-events-none rounded-full" />
               </div>
@@ -939,7 +956,23 @@ export default function App() {
             </button>
 
             <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 border-2 border-rose-400 shadow-md">
-              <img src={LOGO_IMG_URL} alt="Valéria Souza" className="w-full h-full object-cover" />
+              <picture>
+                <source srcSet={logoWebp} type="image/webp" />
+                <img
+                  src={logoSrc}
+                  alt="Valéria Souza"
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                  onError={() => {
+                    if (logoSrc !== REMOTE_LOGO_URL) {
+                      setLogoSrc(REMOTE_LOGO_URL);
+                    }
+                  }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
 
             <h3 className="font-serif-luxury text-xl font-bold text-white mb-1">
